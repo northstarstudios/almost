@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://dnnuq46q0pvth"]
+
+[node name="Beginning-room" type="Node2D"]
+position = Vector2(1, 0)
