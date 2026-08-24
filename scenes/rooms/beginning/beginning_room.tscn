@@ -55,7 +55,7 @@ size = Vector2(63, 55)
 script = ExtResource("3_room")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_0cb1q")]
-position = Vector2(27, 32)
+position = Vector2(120, 34)
 
 [node name="Guide" type="Area2D" parent="." node_paths=PackedStringArray("dialogue_box")]
 position = Vector2(418, 24)
