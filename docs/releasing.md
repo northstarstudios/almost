@@ -2,6 +2,13 @@
 
 Every pull request and push to `main` builds Windows, Linux, macOS, and Web artifacts.
 Pushing a tag beginning with `v` also creates a GitHub Release.
+Each push to `main` deploys the Web build to GitHub Pages.
+
+## Web deployment
+
+In the repository's **Settings -> Pages**, set the source to **GitHub Actions**. After the
+next successful push to `main`, the **Deploy Web build to GitHub Pages** job displays the
+published site URL in its workflow summary.
 
 ## macOS secrets
 
