@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://04n106rmghl6"]
+[gd_scene load_steps=6 format=3 uid="uid://04n106rmghl6"]
 
 [ext_resource type="FontFile" uid="uid://dbu28eutodp1l" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-SemiBold.ttf" id="1_4mjmi"]
 [ext_resource type="Script" uid="uid://b3dhvq3lhd173" path="res://scripts/dialogue_box.gd" id="1_daetb"]
 [ext_resource type="FontFile" uid="uid://cmttydh2xbtuj" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="2_daetb"]
 [ext_resource type="FontFile" uid="uid://x6s8am4a6n2f" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Medium.ttf" id="3_h44io"]
+[ext_resource type="AudioStream" uid="uid://pumrauewe8yr" path="res://assets/sfx/click.mp3" id="5_h44io"]
 
 [node name="DialogueBox" type="CanvasLayer"]
 script = ExtResource("1_daetb")
@@ -35,13 +36,17 @@ theme_type_variation = &"HeaderMedium"
 theme_override_fonts/font = ExtResource("1_4mjmi")
 text = "Guide"
 
-[node name="PromptLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_daetb")
-text = "Hello, I haven't seen you before."
-
 [node name="TextLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_h44io")
-text = "Press interact"
+text = "Hello, I haven't seen you before..."
+
+[node name="PromptLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_daetb")
+text = "Press Interact to continue"
 horizontal_alignment = 1
+
+[node name="TypingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_h44io")
+volume_db = -17.241

@@ -1,7 +1,30 @@
 [gd_scene load_steps=5 format=3 uid="uid://bdi1jj5lmc7m5"]
 
 [ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_bwhtm"]
-[ext_resource type="Script" uid="uid://xvj2nexmli1g" path="res://scenes/rooms/test-room/note.gd" id="2_kn1er"]
+
+[sub_resource type="GDScript" id="GDScript_6pla5"]
+script/source = "extends Area2D
+
+@export var dialogue_box: DialogueBox
+
+var player_nearby := false
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		player_nearby = true
+
+func _on_body_exited(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		player_nearby = false
+
+func _process(_delta: float) -> void:
+	if player_nearby and not dialogue_box.visible:
+		if Input.is_action_just_pressed(\"interact\"):
+			dialogue_box.show_dialogue(\"Guide\", [
+				\"Hello. I haven't seen you before.\",
+				\"Please be careful.\"
+			])
+"
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mjm5x"]
 
@@ -13,9 +36,8 @@ size = Vector2(63, 55)
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_bwhtm")]
 position = Vector2(201, 50)
 
-[node name="Note" type="Area2D" parent="." node_paths=PackedStringArray("message_label")]
-script = ExtResource("2_kn1er")
-message_label = NodePath("../MessageLabel")
+[node name="Note" type="Area2D" parent="."]
+script = SubResource("GDScript_6pla5")
 
 [node name="Sprite2D" type="Sprite2D" parent="Note"]
 position = Vector2(-26, 15)

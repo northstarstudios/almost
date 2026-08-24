@@ -1,7 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0b8n1eukmy7o"]
+[gd_scene load_steps=6 format=3 uid="uid://b0b8n1eukmy7o"]
 
 [ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_0cb1q"]
-[ext_resource type="Script" uid="uid://xvj2nexmli1g" path="res://scenes/rooms/test-room/note.gd" id="2_6pla5"]
+[ext_resource type="PackedScene" uid="uid://04n106rmghl6" path="res://scenes/ui/dialogue_box.tscn" id="2_0cb1q"]
+
+[sub_resource type="GDScript" id="GDScript_6pla5"]
+script/source = "extends Area2D
+
+@export var dialogue_box: DialogueBox
+
+var player_nearby := false
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		player_nearby = true
+
+func _on_body_exited(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		player_nearby = false
+
+func _process(_delta: float) -> void:
+	if player_nearby and not dialogue_box.visible:
+		if Input.is_action_just_pressed(\"interact\"):
+			dialogue_box.show_dialogue(\"Guide\", [
+				\"Hello. I haven't seen you before.\",
+				\"Please be careful.\"
+			])
+"
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mjm5x"]
 
@@ -13,27 +37,21 @@ size = Vector2(63, 55)
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_0cb1q")]
 position = Vector2(108, 32)
 
-[node name="Note" type="Area2D" parent="." node_paths=PackedStringArray("message_label")]
+[node name="Guide" type="Area2D" parent="." node_paths=PackedStringArray("dialogue_box")]
 position = Vector2(418, 24)
-script = ExtResource("2_6pla5")
-message_label = NodePath("../MessageLabel")
+script = SubResource("GDScript_6pla5")
+dialogue_box = NodePath("../DialogueBox")
 
-[node name="Sprite2D" type="Sprite2D" parent="Note"]
+[node name="Sprite2D" type="Sprite2D" parent="Guide"]
 position = Vector2(-26, 15)
 scale = Vector2(45.5, 37.5)
 texture = SubResource("PlaceholderTexture2D_mjm5x")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Note"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Guide"]
 position = Vector2(-28, 14)
 shape = SubResource("RectangleShape2D_fn815")
 
-[node name="MessageLabel" type="Label" parent="."]
-visible = false
-offset_left = 13.0
-offset_top = -21.0
-offset_right = 251.0
-offset_bottom = 2.0
-text = "An old note. The ink has faded."
+[node name="DialogueBox" parent="." instance=ExtResource("2_0cb1q")]
 
-[connection signal="body_entered" from="Note" to="Note" method="_on_body_entered"]
-[connection signal="body_exited" from="Note" to="Note" method="_on_body_exited"]
+[connection signal="body_entered" from="Guide" to="Guide" method="_on_body_entered"]
+[connection signal="body_exited" from="Guide" to="Guide" method="_on_body_exited"]
