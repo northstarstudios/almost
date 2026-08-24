@@ -1,6 +1,8 @@
 class_name DialogueBox
 extends CanvasLayer
 
+signal dialogue_closed
+
 @export_range(1.0, 120.0, 1.0) var characters_per_second := 45.0
 
 @onready var name_label: Label = $Panel/MarginContainer/VBoxContainer/NameLabel
@@ -66,6 +68,10 @@ func update_prompt() -> void:
 	else:
 		prompt_label.text = "Press E to continue"
 
+func close_dialogue() -> void:
+	hide()
+	dialogue_closed.emit()
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible or event.is_echo():
 		return
@@ -80,7 +86,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			line_index += 1
 
 			if line_index >= lines.size():
-				hide()
+				close_dialogue()
 			else:
 				start_current_line()
 
