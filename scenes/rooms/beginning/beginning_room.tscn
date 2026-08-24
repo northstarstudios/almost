@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0b8n1eukmy7o"]
+
+[ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_hyvfp"]
+[ext_resource type="Script" uid="uid://xvj2nexmli1g" path="res://scenes/rooms/test-room/note.gd" id="2_a6tm4"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mjm5x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fn815"]
+size = Vector2(63, 55)
+
+[node name="test_room" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_hyvfp")]
+position = Vector2(201, 50)
+
+[node name="Note" type="Area2D" parent="." node_paths=PackedStringArray("message_label")]
+script = ExtResource("2_a6tm4")
+message_label = NodePath("../MessageLabel")
+
+[node name="Sprite2D" type="Sprite2D" parent="Note"]
+position = Vector2(-26, 15)
+scale = Vector2(45.5, 37.5)
+texture = SubResource("PlaceholderTexture2D_mjm5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Note"]
+position = Vector2(-28, 14)
+shape = SubResource("RectangleShape2D_fn815")
+
+[node name="MessageLabel" type="Label" parent="."]
+visible = false
+offset_left = 13.0
+offset_top = -21.0
+offset_right = 251.0
+offset_bottom = 2.0
+text = "An old note. The ink has faded."
+
+[connection signal="body_entered" from="Note" to="Note" method="_on_body_entered"]
+[connection signal="body_exited" from="Note" to="Note" method="_on_body_exited"]
