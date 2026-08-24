@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="almost"
-run/main_scene="uid://bdi1jj5lmc7m5"
+run/main_scene="uid://b0b8n1eukmy7o"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
