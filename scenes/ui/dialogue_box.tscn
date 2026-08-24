@@ -49,4 +49,4 @@ horizontal_alignment = 1
 
 [node name="TypingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_h44io")
-volume_db = -17.241
+volume_db = -27.808

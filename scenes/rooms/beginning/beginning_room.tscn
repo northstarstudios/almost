@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn815"]
 size = Vector2(63, 55)
 
-[node name="test_room" type="Node2D"]
+[node name="beginning_room" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_0cb1q")]
 position = Vector2(108, 32)
