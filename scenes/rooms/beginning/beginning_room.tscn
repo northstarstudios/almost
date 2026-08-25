@@ -1,65 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0b8n1eukmy7o"]
+[gd_scene load_steps=13 format=4 uid="uid://bbyd2xu2yrlie"]
 
 [ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_0cb1q"]
 [ext_resource type="PackedScene" uid="uid://04n106rmghl6" path="res://scenes/ui/dialogue_box.tscn" id="2_0cb1q"]
+[ext_resource type="Script" uid="uid://qmbxcqhwmqm2" path="res://scenes/rooms/beginning/beginning_room.tres.gd" id="3_dirli"]
 [ext_resource type="Script" uid="uid://s3c7hm3mu0mw" path="res://scripts/beginning_room.gd" id="3_room"]
 [ext_resource type="PackedScene" path="res://scenes/ui/reset_transition.tscn" id="4_reset"]
-
-[sub_resource type="GDScript" id="GDScript_6pla5"]
-script/source = "extends Area2D
-
-@export var dialogue_box: DialogueBox
-
-var player_nearby := false
-var interaction_lock_time := 0.0
-
-func _ready() -> void:
-	dialogue_box.dialogue_closed.connect(_on_dialogue_closed)
-
-func _on_dialogue_closed() -> void:
-	interaction_lock_time = 0.2
-
-func _on_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
-		player_nearby = true
-
-func _on_body_exited(body: Node2D) -> void:
-	if body is CharacterBody2D:
-		player_nearby = false
-
-func _process(delta: float) -> void:
-	if interaction_lock_time > 0.0:
-		interaction_lock_time -= delta
-		return
-
-	if player_nearby and not dialogue_box.visible:
-		if Input.is_action_just_pressed(\"interact\"):
-			if GameState.loop_count == 0:
-				dialogue_box.show_dialogue(\"Guide\", [
-					\"Hello. I haven't seen you before.\",
-					\"Please be careful.\"
-				])
-			else:
-				dialogue_box.show_dialogue(\"Guide\", [
-					\"...\",
-					\"Have I seen you before?\"
-				])
-"
+[ext_resource type="Texture2D" uid="uid://f5y0ivt0xyf" path="res://assets/sprites/templateTilemap.png" id="5_ml4gu"]
+[ext_resource type="Script" uid="uid://dpq0rs3g3oflw" path="res://scripts/CabinExit.gd" id="7_mwd66"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mjm5x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn815"]
-size = Vector2(63, 55)
+size = Vector2(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pnfqk"]
+texture = ExtResource("5_ml4gu")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_dirli"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/4 = SubResource("TileSetAtlasSource_pnfqk")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ml4gu"]
 
 [node name="beginning_room" type="Node2D"]
 script = ExtResource("3_room")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_0cb1q")]
+z_index = 2
 position = Vector2(120, 34)
 
 [node name="Guide" type="Area2D" parent="." node_paths=PackedStringArray("dialogue_box")]
 position = Vector2(418, 24)
-script = SubResource("GDScript_6pla5")
+script = ExtResource("3_dirli")
 dialogue_box = NodePath("../DialogueBox")
 
 [node name="Sprite2D" type="Sprite2D" parent="Guide"]
@@ -75,5 +51,22 @@ shape = SubResource("RectangleShape2D_fn815")
 
 [node name="ResetTransition" parent="." instance=ExtResource("4_reset")]
 
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAANAP7/BAAAAAAAAAANAP//BAAAAAAAAAANAAAABAAAAAAAAAANAAEABAAAAAAAAAANAAIABAAAAAAAAAANAAMABAAAAAAAAAAMAAMABAAAAAAAAAALAAMABAAAAAAAAAAKAAMABAAAAAAAAAAJAAMABAAAAAAAAAAIAAMABAAAAAAAAAAHAAMABAAAAAAAAAAGAAMABAAAAAAAAAAFAAMABAAAAAAAAAAEAAMABAAAAAAAAAADAAMABAAAAAAAAAACAAMABAAAAAAAAAABAAMABAAAAAAAAAAAAAMABAAAAAAAAAAAAAIABAAAAAAAAAAAAAEABAAAAAAAAAAAAAAABAAAAAAAAAAAAP//BAAAAAAAAAAAAP7/BAAAAAAAAAAAAP3/BAAAAAAAAAAAAPz/BAAAAAAAAAABAPz/BAAAAAAAAAACAPz/BAAAAAAAAAADAPz/BAAAAAAAAAAEAPz/BAAAAAAAAAAFAPz/BAAAAAAAAAAIAPz/BAAAAAAAAAAJAPz/BAAAAAAAAAAKAPz/BAAAAAAAAAALAPz/BAAAAAAAAAAMAPz/BAAAAAAAAAANAPz/BAAAAAAAAAANAP3/BAAAAAAAAAAIAPv/BAAAAAAAAAAIAPr/BAAAAAAAAAAFAPv/BAAAAAAAAAAFAPr/BAAAAAAAAAA=")
+tile_set = SubResource("TileSet_dirli")
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(224, -128)
+script = ExtResource("7_mwd66")
+
+[node name="Sprite2D" type="Sprite2D" parent="Exit"]
+scale = Vector2(64, 64)
+texture = SubResource("PlaceholderTexture2D_ml4gu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("RectangleShape2D_fn815")
+
 [connection signal="body_entered" from="Guide" to="Guide" method="_on_body_entered"]
+[connection signal="body_entered" from="Guide" to="Exit" method="_on_guide_body_entered"]
 [connection signal="body_exited" from="Guide" to="Guide" method="_on_body_exited"]
+[connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]

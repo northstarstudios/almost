@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="almost"
-run/main_scene="uid://b0b8n1eukmy7o"
+run/main_scene="uid://bbyd2xu2yrlie"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -26,6 +26,11 @@ window/size/viewport_height=360
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
 
 [editor_plugins]
 
