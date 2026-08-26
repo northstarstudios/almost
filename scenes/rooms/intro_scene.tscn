@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccyathhiguplp"]
+[gd_scene load_steps=6 format=3 uid="uid://ccyathhiguplp"]
 
 [ext_resource type="FontFile" uid="uid://yatbsi6pafmh" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Bold.ttf" id="1_admhp"]
+[ext_resource type="Script" uid="uid://cfj6dbwg6f7xi" path="res://scripts/main_menu.gd" id="1_kfb53"]
 [ext_resource type="FontFile" uid="uid://d2vctdbm4xesi" path="res://assets/fonts/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_kfb53"]
 [ext_resource type="FontFile" uid="uid://x6s8am4a6n2f" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Medium.ttf" id="3_sdkn4"]
 [ext_resource type="FontFile" uid="uid://cmttydh2xbtuj" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="4_5gwra"]
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kfb53")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -58,3 +60,6 @@ text = "BEGIN"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_5gwra")
 text = "QUIT"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
