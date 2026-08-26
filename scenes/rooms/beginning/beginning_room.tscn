@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://b0b8n1eukmy7o"]
+[gd_scene load_steps=12 format=4 uid="uid://b0b8n1eukmy7o"]
 
 [ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_0cb1q"]
 [ext_resource type="PackedScene" uid="uid://04n106rmghl6" path="res://scenes/ui/dialogue_box.tscn" id="2_0cb1q"]
 [ext_resource type="Script" uid="uid://s3c7hm3mu0mw" path="res://scripts/beginning_room.gd" id="3_room"]
 [ext_resource type="PackedScene" path="res://scenes/ui/reset_transition.tscn" id="4_reset"]
 [ext_resource type="Texture2D" uid="uid://f5y0ivt0xyf" path="res://assets/sprites/templateTilemap.png" id="5_tiles"]
-[ext_resource type="Script" path="res://scripts/room_exit.gd" id="6_exit"]
 
 [sub_resource type="GDScript" id="GDScript_6pla5"]
 script/source = "extends Area2D
@@ -66,9 +65,6 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/4 = SubResource("TileSetAtlasSource_pnfqk")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
-size = Vector2(32, 96)
-
 [node name="beginning_room" type="Node2D"]
 script = ExtResource("3_room")
 
@@ -98,14 +94,5 @@ z_index = 1
 tile_map_data = PackedByteArray("AAANAP7/BAAAAAAAAAANAP//BAAAAAAAAAANAAAABAAAAAAAAAANAAEABAAAAAAAAAANAAIABAAAAAAAAAANAAMABAAAAAAAAAAMAAMABAAAAAAAAAALAAMABAAAAAAAAAAKAAMABAAAAAAAAAAJAAMABAAAAAAAAAAIAAMABAAAAAAAAAAHAAMABAAAAAAAAAAGAAMABAAAAAAAAAAFAAMABAAAAAAAAAAEAAMABAAAAAAAAAADAAMABAAAAAAAAAACAAMABAAAAAAAAAABAAMABAAAAAAAAAAAAAMABAAAAAAAAAAAAAIABAAAAAAAAAAAAAEABAAAAAAAAAAAAAAABAAAAAAAAAAAAP//BAAAAAAAAAAAAP7/BAAAAAAAAAAAAP3/BAAAAAAAAAAAAPz/BAAAAAAAAAABAPz/BAAAAAAAAAACAPz/BAAAAAAAAAADAPz/BAAAAAAAAAAEAPz/BAAAAAAAAAAFAPz/BAAAAAAAAAAIAPv/BAAAAAAAAAAIAPr/BAAAAAAAAAAFAPv/BAAAAAAAAAAFAPr/BAAAAAAAAAA=")
 tile_set = SubResource("TileSet_dirli")
 
-[node name="Exit" type="Area2D" parent="."]
-position = Vector2(384, 24)
-script = ExtResource("6_exit")
-destination_scene = "res://scenes/rooms/arrival_hallway.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
-shape = SubResource("RectangleShape2D_exit")
-
 [connection signal="body_entered" from="Aster" to="Aster" method="_on_body_entered"]
 [connection signal="body_exited" from="Aster" to="Aster" method="_on_body_exited"]
-[connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]
