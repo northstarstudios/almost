@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://ccyathhiguplp"]
 
-[ext_resource type="Script" uid="uid://cfj6dbwg6f7xi" path="res://scripts/main_menu.gd" id="1_dn3hh"]
-[ext_resource type="FontFile" uid="uid://yatbsi6pafmh" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Bold.ttf" id="2_xdumk"]
-[ext_resource type="FontFile" uid="uid://d2vctdbm4xesi" path="res://assets/fonts/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="3_8cutk"]
-[ext_resource type="FontFile" uid="uid://x6s8am4a6n2f" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Medium.ttf" id="4_iigk5"]
-[ext_resource type="FontFile" uid="uid://cmttydh2xbtuj" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="5_vbljx"]
+[ext_resource type="Script" uid="uid://cfj6dbwg6f7xi" path="res://scripts/main_menu.gd" id="1_x2yvf"]
+[ext_resource type="FontFile" uid="uid://yatbsi6pafmh" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Bold.ttf" id="2_uhagc"]
+[ext_resource type="FontFile" uid="uid://d2vctdbm4xesi" path="res://assets/fonts/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="3_btxxm"]
+[ext_resource type="FontFile" uid="uid://x6s8am4a6n2f" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Medium.ttf" id="4_wb0q5"]
+[ext_resource type="FontFile" uid="uid://cmttydh2xbtuj" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="5_q85j6"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_dn3hh")
+script = ExtResource("1_x2yvf")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -37,14 +37,14 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_xdumk")
+theme_override_fonts/font = ExtResource("2_uhagc")
 theme_override_font_sizes/font_size = 100
 text = "ALMØST"
 horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_8cutk")
+theme_override_fonts/font = ExtResource("3_btxxm")
 text = "a game that remembers..."
 
 [node name="Gap" type="Control" parent="CenterContainer/VBoxContainer"]
@@ -53,12 +53,12 @@ layout_mode = 2
 
 [node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_iigk5")
+theme_override_fonts/font = ExtResource("4_wb0q5")
 text = "BEGIN"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_vbljx")
+theme_override_fonts/font = ExtResource("5_q85j6")
 text = "QUIT"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]

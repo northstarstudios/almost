@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyvbsxt6psw03"]
+
+[ext_resource type="Script" uid="uid://bhihy7sey57f" path="res://scripts/loading_scene.gd" id="1_smnf2"]
+[ext_resource type="FontFile" uid="uid://cmttydh2xbtuj" path="res://assets/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="2_a0egu"]
+
+[node name="LoadingScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_smnf2")
+
+[node name="Backgroud" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.051971, 0.051971, 0.051971, 1)
+
+[node name="MessageLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_a0egu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FadeOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
