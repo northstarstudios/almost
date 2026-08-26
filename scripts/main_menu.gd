@@ -1,6 +1,6 @@
 extends Control
 
-const FIRST_ROOM := "res://scenes/rooms/beginning/beginning_room.tcsn"
+const FIRST_ROOM := "res://scenes/rooms/beginning/beginning_room.tscn"
 
 func _ready() -> void:
 	$CenterContainer/VBoxContainer/NewGameButton.grab_focus()
