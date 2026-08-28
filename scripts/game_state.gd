@@ -24,6 +24,5 @@ func record_begin() -> void:
 		if marker != null:
 			marker.store_string("has_begun=true\n")
 
-func complete_reset() -> void:
+func advance_loop() -> void:
 	loop_count += 1
-	get_tree().reload_current_scene()

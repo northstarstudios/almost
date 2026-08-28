@@ -44,7 +44,7 @@ func interact() -> void:
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mjm5x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn815"]
-size = Vector2(63, 55)
+size = Vector2(43, 65)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pnfqk"]
 texture = ExtResource("5_tiles")
@@ -72,11 +72,11 @@ dialogue_box = NodePath("../DialogueBox")
 
 [node name="Sprite2D" type="Sprite2D" parent="Aster"]
 position = Vector2(-16.25, 0.75)
-scale = Vector2(45.5, 37.5)
+scale = Vector2(32, 48)
 texture = SubResource("PlaceholderTexture2D_mjm5x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Aster"]
-position = Vector2(-18.25, -0.25)
+position = Vector2(-16.25, 0.75)
 shape = SubResource("RectangleShape2D_fn815")
 
 [node name="DialogueBox" parent="." instance=ExtResource("2_0cb1q")]
@@ -90,6 +90,7 @@ tile_set = SubResource("TileSet_dirli")
 
 [node name="OpeningFade" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="Overlay" type="ColorRect" parent="OpeningFade"]
 anchors_preset = 15
