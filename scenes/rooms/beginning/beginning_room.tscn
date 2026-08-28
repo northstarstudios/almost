@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://b0b8n1eukmy7o"]
+[gd_scene load_steps=12 format=4 uid="uid://b0b8n1eukmy7o"]
 
 [ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_0cb1q"]
 [ext_resource type="PackedScene" uid="uid://04n106rmghl6" path="res://scenes/ui/dialogue_box.tscn" id="2_0cb1q"]
 [ext_resource type="Script" uid="uid://s3c7hm3mu0mw" path="res://scripts/beginning_room.gd" id="3_room"]
 [ext_resource type="PackedScene" path="res://scenes/ui/reset_transition.tscn" id="4_reset"]
 [ext_resource type="Texture2D" uid="uid://f5y0ivt0xyf" path="res://assets/sprites/templateTilemap.png" id="5_tiles"]
+[ext_resource type="PackedScene" uid="uid://bfb0gibajd70r" path="res://scenes/ui/pause_menu.tscn" id="6_pnfqk"]
 
 [sub_resource type="GDScript" id="GDScript_6pla5"]
 script/source = "extends Area2D
@@ -90,7 +91,6 @@ tile_set = SubResource("TileSet_dirli")
 
 [node name="OpeningFade" type="CanvasLayer" parent="."]
 layer = 10
-visible = false
 
 [node name="Overlay" type="ColorRect" parent="OpeningFade"]
 anchors_preset = 15
@@ -100,3 +100,5 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.00453645, 0.00453645, 0.00453645, 1)
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_pnfqk")]
