@@ -41,10 +41,7 @@ tile_set = ExtResource("2_30ct7")
 [node name="EvilAster" parent="Maze" node_paths=PackedStringArray("dialogue_box") instance=ExtResource("3_6bw03")]
 position = Vector2(143, 197)
 dialogue_box = NodePath("../../DialogueBox_EvilAster")
-dialogue_FirstLoop = Array[String](["Oh..?", "How I  got here before you, you ask?", "Well ehm that's not important.", "But you, you were faster than excpected, I'll give you that.", "turn", "So let me fix that for you", "reset"])
-dialogue_OtherLoops = null
-dialogue_exhausted = null
-dialogueID = null
+dialogue_FirstLoop = Array[String](["Oh..?", "How I  got here before you, you ask?", "Well that's not important.", "But you, you were faster than excpected, I'll give you that.", "To bad you didn't find the door at the top left in the room before the maze.", "turn", "But now, let me get rid of you.", "reset"])
 
 [node name="HiddenDoor" parent="." node_paths=PackedStringArray("HiddenRoom", "dialogue_box") instance=ExtResource("3_30ct7")]
 position = Vector2(-176, -32)

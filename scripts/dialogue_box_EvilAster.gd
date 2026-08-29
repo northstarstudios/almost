@@ -50,6 +50,7 @@ func start_current_line() -> void:
 		EvilAster.modulate = Color(0.5,0.5,1,1)
 		line_index += 1
 	elif(lines[line_index] == "reset"):
+		get_parent().get_parent().start_reset(false)
 		line_index += 1
 		pass
 	
