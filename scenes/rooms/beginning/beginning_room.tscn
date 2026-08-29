@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://b0b8n1eukmy7o"]
+[gd_scene load_steps=10 format=4 uid="uid://b0b8n1eukmy7o"]
 
 [ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_0cb1q"]
 [ext_resource type="PackedScene" uid="uid://04n106rmghl6" path="res://scenes/ui/dialogue_box.tscn" id="2_0cb1q"]
 [ext_resource type="Script" uid="uid://s3c7hm3mu0mw" path="res://scripts/beginning_room.gd" id="3_room"]
 [ext_resource type="PackedScene" path="res://scenes/ui/reset_transition.tscn" id="4_reset"]
-[ext_resource type="Texture2D" uid="uid://f5y0ivt0xyf" path="res://assets/sprites/templateTilemap.png" id="5_tiles"]
+[ext_resource type="TileSet" uid="uid://cmmrcxuhop5b3" path="res://assets/TileSets/TileSet.tres" id="5_pnfqk"]
 [ext_resource type="PackedScene" uid="uid://bfb0gibajd70r" path="res://scenes/ui/pause_menu.tscn" id="6_pnfqk"]
 
 [sub_resource type="GDScript" id="GDScript_6pla5"]
@@ -47,17 +47,6 @@ func interact() -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn815"]
 size = Vector2(43, 65)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pnfqk"]
-texture = ExtResource("5_tiles")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-
-[sub_resource type="TileSet" id="TileSet_dirli"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
-sources/4 = SubResource("TileSetAtlasSource_pnfqk")
-
 [node name="beginning_room" type="Node2D"]
 script = ExtResource("3_room")
 
@@ -86,13 +75,15 @@ shape = SubResource("RectangleShape2D_fn815")
 
 [node name="RoomBoundary" type="TileMapLayer" parent="."]
 z_index = 1
-tile_map_data = PackedByteArray("AAAAAAMABAAAAAAAAAAAAAIABAAAAAAAAAAAAAEABAAAAAAAAAAAAAAABAAAAAAAAAAAAP//BAAAAAAAAAAAAP7/BAAAAAAAAAAAAP3/BAAAAAAAAAAAAPz/BAAAAAAAAAABAPz/BAAAAAAAAAACAPz/BAAAAAAAAAADAPz/BAAAAAAAAAAEAPz/BAAAAAAAAAAFAPz/BAAAAAAAAAAGAPz/BAAAAAAAAAAIAPz/BAAAAAAAAAAKAPz/BAAAAAAAAAAJAPz/BAAAAAAAAAAHAPz/BAAAAAAAAAANAPz/BAAAAAAAAAAMAPz/BAAAAAAAAAALAPz/BAAAAAAAAAAAAAQABAAAAAAAAAAAAAUABAAAAAAAAAABAAUABAAAAAAAAAACAAUABAAAAAAAAAADAAUABAAAAAAAAAAEAAUABAAAAAAAAAAFAAUABAAAAAAAAAAGAAUABAAAAAAAAAAHAAUABAAAAAAAAAAIAAUABAAAAAAAAAAJAAUABAAAAAAAAAAKAAUABAAAAAAAAAALAAUABAAAAAAAAAAMAAUABAAAAAAAAAANAAUABAAAAAAAAAAOAAUABAAAAAAAAAAOAPz/BAAAAAAAAAAOAP3/BAAAAAAAAAAOAP7/BAAAAAAAAAAOAP//BAAAAAAAAAAOAAAABAAAAAAAAAAOAAEABAAAAAAAAAAOAAIABAAAAAAAAAAOAAMABAAAAAAAAAAOAAQABAAAAAAAAAA=")
-tile_set = SubResource("TileSet_dirli")
+tile_map_data = PackedByteArray("AAAAAAMABAAAAAAAAAAAAAIABAAAAAAAAAAAAAEABAAAAAAAAAAAAAAABAAAAAAAAAAAAP//BAAAAAAAAAAAAP7/BAAAAAAAAAAAAP3/BAAAAAAAAAAAAPz/BAAAAAAAAAABAPz/BAAAAAAAAAACAPz/BAAAAAAAAAADAPz/BAAAAAAAAAAEAPz/BAAAAAAAAAAFAPz/BAAAAAAAAAAGAPz/BAAAAAAAAAAIAPz/BAAAAAAAAAAKAPz/BAAAAAAAAAAJAPz/BAAAAAAAAAAHAPz/BAAAAAAAAAANAPz/BAAAAAAAAAAMAPz/BAAAAAAAAAALAPz/BAAAAAAAAAAAAAQABAAAAAAAAAAAAAUABAAAAAAAAAABAAUABAAAAAAAAAACAAUABAAAAAAAAAADAAUABAAAAAAAAAAEAAUABAAAAAAAAAAFAAUABAAAAAAAAAAGAAUABAAAAAAAAAAHAAUABAAAAAAAAAAIAAUABAAAAAAAAAAJAAUABAAAAAAAAAAKAAUABAAAAAAAAAALAAUABAAAAAAAAAAMAAUABAAAAAAAAAANAAUABAAAAAAAAAAOAAUABAAAAAAAAAAOAPz/BAAAAAAAAAAOAP3/BAAAAAAAAAAOAP7/BAAAAAAAAAAOAP//BAAAAAAAAAAOAAAABAAAAAAAAAAOAAEABAAAAAAAAAAOAAMABAAAAAAAAAAOAAQABAAAAAAAAAAOAAIABAAAAAAAAAA=")
+tile_set = ExtResource("5_pnfqk")
 
 [node name="OpeningFade" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="Overlay" type="ColorRect" parent="OpeningFade"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -102,3 +93,4 @@ mouse_filter = 2
 color = Color(0.00453645, 0.00453645, 0.00453645, 1)
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_pnfqk")]
+visible = false

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=4 uid="uid://dlum7tegb4u8"]
+
+[ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_s4f8b"]
+[ext_resource type="TileSet" uid="uid://cmmrcxuhop5b3" path="res://assets/TileSets/TileSet.tres" id="2_30ct7"]
+[ext_resource type="PackedScene" uid="uid://xihe52pii61p" path="res://scenes/objects/hidden_door.tscn" id="3_30ct7"]
+[ext_resource type="PackedScene" uid="uid://04n106rmghl6" path="res://scenes/ui/dialogue_box.tscn" id="4_xvb8q"]
+
+[node name="FirstRoom" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_s4f8b")]
+position = Vector2(-3, 130)
+
+[node name="NormalRoom" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAEAAQABAAAAAAAAAADAAQABAAAAAAAAAACAAQABAAAAAAAAAD+/wQABAAAAAAAAAD9/wQABAAAAAAAAAD8/wQABAAAAAAAAAD7/wQABAAAAAAAAAABAAQABAAAAAAAAAAFAAQABAAAAAAAAAAFAAMABAAAAAAAAAAFAAIABAAAAAAAAAAFAAEABAAAAAAAAAAFAAAABAAAAAAAAAAFAP//BAAAAAAAAAAFAP7/BAAAAAAAAAD6/wQABAAAAAAAAAD6/wMABAAAAAAAAAD6/wIABAAAAAAAAAD6/wEABAAAAAAAAAD6/wAABAAAAAAAAAD6//3/BAAAAAAAAAD7//3/BAAAAAAAAAD8//3/BAAAAAAAAAD9//3/BAAAAAAAAAD+//3/BAAAAAAAAAD///3/BAAAAAAAAAAAAP3/BAAAAAAAAAABAP3/BAAAAAAAAAACAP3/BAAAAAAAAAADAP3/BAAAAAAAAAAEAP3/BAAAAAAAAAAFAP3/BAAAAAAAAAABAAUABAAAAAAAAAABAAYABAAAAAAAAAABAAcABAAAAAAAAAD+/wUABAAAAAAAAAD+/wYABAAAAAAAAAD+/wcABAAAAAAAAAA=")
+tile_set = ExtResource("2_30ct7")
+
+[node name="HiddenRoom" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD5//3/BAAAAAAAAAD4//3/BAAAAAAAAAD3//3/BAAAAAAAAAD2//3/BAAAAAAAAAD1//3/BAAAAAAAAAD0//3/BAAAAAAAAADz//3/BAAAAAAAAADy//3/BAAAAAAAAADx//3/BAAAAAAAAAD5/wAABAAAAAAAAAD4/wAABAAAAAAAAAD3/wAABAAAAAAAAAD2/wAABAAAAAAAAAD1/wAABAAAAAAAAAD1/wEABAAAAAAAAAD1/wIABAAAAAAAAAD0/wIABAAAAAAAAADz/wIABAAAAAAAAADy/wIABAAAAAAAAADx/wIABAAAAAAAAADw/wIABAAAAAAAAADw/wEABAAAAAAAAADw/wAABAAAAAAAAADw////BAAAAAAAAADw//7/BAAAAAAAAADw//3/BAAAAAAAAAA=")
+tile_set = ExtResource("2_30ct7")
+
+[node name="HiddenDoor" parent="." node_paths=PackedStringArray("HiddenRoom", "dialogue_box") instance=ExtResource("3_30ct7")]
+position = Vector2(-176, -32)
+HiddenRoom = NodePath("../HiddenRoom")
+dialogue_box = NodePath("../DialogueBox")
+
+[node name="DialogueBox" parent="." instance=ExtResource("4_xvb8q")]

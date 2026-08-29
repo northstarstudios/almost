@@ -9,6 +9,7 @@ const BEGIN_MARKERS := [
 var loop_count := 0
 var has_begun := false
 
+
 func _ready() -> void:
 	for marker_path in BEGIN_MARKERS:
 		if FileAccess.file_exists(marker_path):
