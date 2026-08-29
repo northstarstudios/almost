@@ -11,6 +11,10 @@ size = Vector2(43, 65)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_v8obv")
+dialogue_FirstLoop = null
+dialogue_OtherLoops = null
+dialogue_exhausted = null
+dialogueID = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-16.25, 0.75)

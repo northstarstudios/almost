@@ -5,6 +5,8 @@ extends Area2D
 @export var dialogue_OtherLoops: Array[String]
 @export var dialogue_exhausted: Array[String]
 
+@export var dialogueID = -1
+
 var interaction_lock_time := 0.0
 
 func _ready() -> void:
@@ -22,7 +24,7 @@ func interact() -> void:
 		return
 
 	if GameState.loop_count == 0:
-		dialogue_box.show_dialogue("Aster", dialogue_FirstLoop, -1)
+		dialogue_box.show_dialogue("Aster", dialogue_FirstLoop, dialogueID)
 		"""
 		dialogue_box.show_dialogue("Aster", [
 			"Oh!",
@@ -31,7 +33,7 @@ func interact() -> void:
 		])
 		"""
 	else:
-		dialogue_box.show_dialogue("Aster", dialogue_OtherLoops, -1)
+		dialogue_box.show_dialogue("Aster", dialogue_OtherLoops, dialogueID)
 		
 		"""
 		dialogue_box.show_dialogue("Aster", [
