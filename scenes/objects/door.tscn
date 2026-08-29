@@ -1,29 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://xihe52pii61p"]
+[gd_scene load_steps=4 format=3 uid="uid://cawmfmpx2fk7s"]
 
-[ext_resource type="Script" uid="uid://bmkxx0hqhsc57" path="res://scripts/hiddenDoor.gd" id="1_7ekht"]
-[ext_resource type="Texture2D" uid="uid://f5y0ivt0xyf" path="res://assets/sprites/templateTilemap.png" id="2_yokwn"]
+[ext_resource type="Script" uid="uid://dul43o8huohy8" path="res://scripts/Door.gd" id="1_uw3m6"]
+[ext_resource type="Texture2D" uid="uid://f5y0ivt0xyf" path="res://assets/sprites/templateTilemap.png" id="2_uw3m6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edejk"]
 size = Vector2(32, 64)
 
-[node name="HiddenDoor" type="Area2D"]
+[node name="Door" type="Area2D"]
 collision_layer = 3
-script = ExtResource("1_7ekht")
+script = ExtResource("1_uw3m6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_edejk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 16)
-texture = ExtResource("2_yokwn")
+texture = ExtResource("2_uw3m6")
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
+region_rect = Rect2(32, 0, 32, 32)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(0, -32)
-texture = ExtResource("2_yokwn")
+texture = ExtResource("2_uw3m6")
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
+region_rect = Rect2(32, 0, 32, 32)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

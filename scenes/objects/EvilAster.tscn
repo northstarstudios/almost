@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo8pdnprr6asl"]
+
+[ext_resource type="Script" uid="uid://btsw4lxky26dv" path="res://scripts/EvilAster.gd" id="1_v8obv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_v8obv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvk33"]
+size = Vector2(43, 65)
+
+[node name="EvilAster" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_v8obv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-16.25, 0.75)
+scale = Vector2(32, 48)
+texture = SubResource("PlaceholderTexture2D_v8obv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-16.25, 0.75)
+shape = SubResource("RectangleShape2D_xvk33")

@@ -1,9 +1,10 @@
-class_name DialogueBox
+class_name DialogueBoxEvilAster
 extends CanvasLayer
 
 signal dialogue_closed
 
 @export_range(1.0, 120.0, 1.0) var characters_per_second := 45.0
+@export var EvilAster: Area2D
 
 @onready var name_label: Label = $Panel/MarginContainer/VBoxContainer/NameLabel
 @onready var text_label: Label = $Panel/MarginContainer/VBoxContainer/TextLabel
@@ -18,6 +19,7 @@ var character_timer := 0.0
 var is_typing := false
 
 var currentHeldId = -1;
+
 
 func _ready() -> void:
 	hide()
@@ -37,7 +39,6 @@ func show_dialogue(speaker: String, new_lines: Array[String], doorID: int) -> vo
 	currentHeldId = doorID
 	if new_lines.is_empty():
 		return
-
 	name_label.text = speaker
 	lines = new_lines
 	line_index = 0
@@ -45,6 +46,17 @@ func show_dialogue(speaker: String, new_lines: Array[String], doorID: int) -> vo
 	start_current_line()
 
 func start_current_line() -> void:
+	if(lines[line_index] == "turn"):
+		EvilAster.modulate = Color(0.5,0.5,1,1)
+		line_index += 1
+	elif(lines[line_index] == "reset"):
+		line_index += 1
+		pass
+	
+	if line_index >= lines.size():
+		close_dialogue()
+		return;
+		
 	current_line = lines[line_index]
 	character_index = 0
 	character_timer = 0.0
