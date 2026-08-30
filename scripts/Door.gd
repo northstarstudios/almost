@@ -2,6 +2,7 @@ extends Area2D
 
 @export var NextRoom: Node2D
 @export var dialogue_box: DialogueBox
+@export var locked := false
 
 var interaction_lock_time := 0.0
 
@@ -14,10 +15,7 @@ func _on_dialogue_closed(dialogue_id: int) -> void:
 	if dialogue_id != doorID:
 		return
 	interaction_lock_time = 0.2
-	$CollisionShape2D.disabled = true
-	$StaticBody2D/CollisionShape2D.disabled = true
-	hide()
-	NextRoom.show()
+	unlock()
 
 func _process(delta: float) -> void:
 	if interaction_lock_time > 0.0:
@@ -26,8 +24,21 @@ func _process(delta: float) -> void:
 func interact() -> void:
 	if interaction_lock_time > 0.0 or dialogue_box.visible:
 		return
+	if locked:
+		dialogue_box.show_dialogue("Inner Voice", [
+			"The door is locked.",
+			"It needs a four-digit access code."
+		])
+		return
 
 	dialogue_box.show_dialogue("Inner Voice", [
 		"A door blocks the way.",
 		"You push it open.",
 	], doorID)
+
+
+func unlock() -> void:
+	$CollisionShape2D.set_deferred("disabled", true)
+	$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
+	hide()
+	NextRoom.show()

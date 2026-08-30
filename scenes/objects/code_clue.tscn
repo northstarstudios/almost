@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/code_clue.gd" id="1_clue"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_clue"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_clue"]
+size = Vector2(36, 44)
+
+[node name="CodeClue" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_clue")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.78, 0.25, 1)
+scale = Vector2(20, 28)
+texture = SubResource("PlaceholderTexture2D_clue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_clue")

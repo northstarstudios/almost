@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://b0b8n1eukmy7o"]
+[gd_scene load_steps=13 format=4 uid="uid://b0b8n1eukmy7o"]
 
 [ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_0cb1q"]
 [ext_resource type="PackedScene" uid="uid://04n106rmghl6" path="res://scenes/ui/dialogue_box.tscn" id="2_0cb1q"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bfb0gibajd70r" path="res://scenes/ui/pause_menu.tscn" id="6_pnfqk"]
 [ext_resource type="PackedScene" uid="uid://dlum7tegb4u8" path="res://scenes/rooms/first_room.tscn" id="8_mwd66"]
 [ext_resource type="PackedScene" uid="uid://cawmfmpx2fk7s" path="res://scenes/objects/door.tscn" id="9_hpmrr"]
+[ext_resource type="PackedScene" path="res://scenes/objects/code_clue.tscn" id="10_clue"]
+[ext_resource type="PackedScene" path="res://scenes/objects/code_terminal.tscn" id="11_terminal"]
+[ext_resource type="PackedScene" path="res://scenes/ui/code_terminal.tscn" id="12_terminal_ui"]
 
 [node name="beginning_room" type="Node2D"]
 script = ExtResource("3_room")
@@ -20,10 +23,22 @@ position = Vector2(76, 113)
 [node name="Ari" parent="." node_paths=PackedStringArray("dialogue_box") instance=ExtResource("3_dirli")]
 position = Vector2(416, 72)
 dialogue_box = NodePath("../DialogueBox")
-dialogue_FirstLoop = Array[String](["Oh!", "You made it.", "I was worried this place had stopped making people."])
+dialogue_FirstLoop = Array[String](["Oh!", "You made it.", "I was worried this place had stopped making people.", "If you reach a dead end, press ESC. You can choose RESET from there."])
 dialogue_OtherLoops = Array[String](["You came back.", "...", "That's not meant to happen."])
 
 [node name="DialogueBox" parent="." instance=ExtResource("2_0cb1q")]
+
+[node name="CodeTerminalUI" parent="." instance=ExtResource("12_terminal_ui")]
+visible = false
+
+[node name="CodeClue" parent="." node_paths=PackedStringArray("dialogue_box") instance=ExtResource("10_clue")]
+position = Vector2(97, -7)
+dialogue_box = NodePath("../DialogueBox")
+
+[node name="CodeTerminal" parent="." node_paths=PackedStringArray("terminal_ui", "locked_door") instance=ExtResource("11_terminal")]
+position = Vector2(370, -75)
+terminal_ui = NodePath("../CodeTerminalUI")
+locked_door = NodePath("../Door")
 
 [node name="ResetTransition" parent="." instance=ExtResource("4_reset")]
 
@@ -49,7 +64,6 @@ color = Color(0.00453645, 0.00453645, 0.00453645, 1)
 visible = false
 
 [node name="FirstRoom" parent="." instance=ExtResource("8_mwd66")]
-visible = false
 position = Vector2(416, -384)
 
 [node name="Door" parent="." node_paths=PackedStringArray("NextRoom", "dialogue_box") instance=ExtResource("9_hpmrr")]
@@ -57,3 +71,4 @@ position = Vector2(416, -112)
 rotation = 1.5708
 NextRoom = NodePath("../FirstRoom")
 dialogue_box = NodePath("../DialogueBox")
+locked = true
