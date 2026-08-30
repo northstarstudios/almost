@@ -1,10 +1,10 @@
-class_name DialogueBox
+class_name DialogueBoxEvilAster
 extends CanvasLayer
 
 signal dialogue_closed
-signal dialogue_closed_with_id(dialogue_id: int)
 
 @export_range(1.0, 120.0, 1.0) var characters_per_second := 45.0
+@export var EvilAster: Area2D
 
 @onready var name_label: Label = $Panel/MarginContainer/VBoxContainer/NameLabel
 @onready var text_label: Label = $Panel/MarginContainer/VBoxContainer/TextLabel
@@ -17,8 +17,6 @@ var current_line := ""
 var character_index := 0
 var character_timer := 0.0
 var is_typing := false
-
-var current_dialogue_id := -1
 
 func _ready() -> void:
 	hide()
@@ -34,11 +32,9 @@ func _process(delta: float) -> void:
 		character_timer -= seconds_per_character
 		reveal_next_character()
 
-func show_dialogue(speaker: String, new_lines: Array[String], dialogue_id: int = -1) -> void:
-	current_dialogue_id = dialogue_id
+func show_dialogue(speaker: String, new_lines: Array[String], _dialogue_id: int = -1) -> void:
 	if new_lines.is_empty():
 		return
-
 	name_label.text = speaker
 	lines = new_lines
 	line_index = 0
@@ -46,6 +42,17 @@ func show_dialogue(speaker: String, new_lines: Array[String], dialogue_id: int =
 	start_current_line()
 
 func start_current_line() -> void:
+	if(lines[line_index] == "turn"):
+		EvilAster.modulate = Color(0.5,0.5,1,1)
+		line_index += 1
+	elif(lines[line_index] == "reset"):
+		get_parent().get_parent().start_reset(false)
+		line_index += 1
+
+	if line_index >= lines.size():
+		close_dialogue()
+		return
+
 	current_line = lines[line_index]
 	character_index = 0
 	character_timer = 0.0
@@ -75,7 +82,6 @@ func update_prompt() -> void:
 func close_dialogue() -> void:
 	hide()
 	dialogue_closed.emit()
-	dialogue_closed_with_id.emit(current_dialogue_id)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible or event.is_echo():

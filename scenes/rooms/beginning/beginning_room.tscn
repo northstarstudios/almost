@@ -1,84 +1,27 @@
-[gd_scene load_steps=12 format=4 uid="uid://b0b8n1eukmy7o"]
+[gd_scene load_steps=10 format=4 uid="uid://b0b8n1eukmy7o"]
 
 [ext_resource type="PackedScene" uid="uid://ds5legxsulxns" path="res://scenes/player/player.tscn" id="1_0cb1q"]
 [ext_resource type="PackedScene" uid="uid://04n106rmghl6" path="res://scenes/ui/dialogue_box.tscn" id="2_0cb1q"]
+[ext_resource type="PackedScene" uid="uid://hpm5dduceu4u" path="res://scenes/objects/aster.tscn" id="3_dirli"]
 [ext_resource type="Script" uid="uid://s3c7hm3mu0mw" path="res://scripts/beginning_room.gd" id="3_room"]
 [ext_resource type="PackedScene" path="res://scenes/ui/reset_transition.tscn" id="4_reset"]
-[ext_resource type="Texture2D" uid="uid://f5y0ivt0xyf" path="res://assets/sprites/templateTilemap.png" id="5_tiles"]
+[ext_resource type="TileSet" uid="uid://cmmrcxuhop5b3" path="res://assets/TileSets/TileSet.tres" id="5_pnfqk"]
 [ext_resource type="PackedScene" uid="uid://bfb0gibajd70r" path="res://scenes/ui/pause_menu.tscn" id="6_pnfqk"]
-
-[sub_resource type="GDScript" id="GDScript_6pla5"]
-script/source = "extends Area2D
-
-@export var dialogue_box: DialogueBox
-
-var interaction_lock_time := 0.0
-
-func _ready() -> void:
-	dialogue_box.dialogue_closed.connect(_on_dialogue_closed)
-
-func _on_dialogue_closed() -> void:
-	interaction_lock_time = 0.2
-
-func _process(delta: float) -> void:
-	if interaction_lock_time > 0.0:
-		interaction_lock_time -= delta
-
-func interact() -> void:
-	if interaction_lock_time > 0.0 or dialogue_box.visible:
-		return
-
-	if GameState.loop_count == 0:
-		dialogue_box.show_dialogue(\"Aster\", [
-			\"Oh!\",
-			\"You made it.\",
-			\"I was worried this place had stopped making people.\"
-		])
-	else:
-		dialogue_box.show_dialogue(\"Aster\", [
-			\"You came back.\",
-			\"...\",
-			\"That's not meant to happen.\"
-		])
-"
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mjm5x"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fn815"]
-size = Vector2(43, 65)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pnfqk"]
-texture = ExtResource("5_tiles")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-
-[sub_resource type="TileSet" id="TileSet_dirli"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
-sources/4 = SubResource("TileSetAtlasSource_pnfqk")
+[ext_resource type="PackedScene" uid="uid://dlum7tegb4u8" path="res://scenes/rooms/first_room.tscn" id="8_mwd66"]
+[ext_resource type="PackedScene" uid="uid://cawmfmpx2fk7s" path="res://scenes/objects/door.tscn" id="9_hpmrr"]
 
 [node name="beginning_room" type="Node2D"]
 script = ExtResource("3_room")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_0cb1q")]
+visibility_layer = 2
 position = Vector2(76, 113)
 
-[node name="Aster" type="Area2D" parent="." node_paths=PackedStringArray("dialogue_box")]
+[node name="Ari" parent="." node_paths=PackedStringArray("dialogue_box") instance=ExtResource("3_dirli")]
 position = Vector2(416, 72)
-collision_layer = 2
-collision_mask = 0
-script = SubResource("GDScript_6pla5")
 dialogue_box = NodePath("../DialogueBox")
-
-[node name="Sprite2D" type="Sprite2D" parent="Aster"]
-position = Vector2(-16.25, 0.75)
-scale = Vector2(32, 48)
-texture = SubResource("PlaceholderTexture2D_mjm5x")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Aster"]
-position = Vector2(-16.25, 0.75)
-shape = SubResource("RectangleShape2D_fn815")
+dialogue_FirstLoop = Array[String](["Oh!", "You made it.", "I was worried this place had stopped making people."])
+dialogue_OtherLoops = Array[String](["You came back.", "...", "That's not meant to happen."])
 
 [node name="DialogueBox" parent="." instance=ExtResource("2_0cb1q")]
 
@@ -86,11 +29,12 @@ shape = SubResource("RectangleShape2D_fn815")
 
 [node name="RoomBoundary" type="TileMapLayer" parent="."]
 z_index = 1
-tile_map_data = PackedByteArray("AAAAAAMABAAAAAAAAAAAAAIABAAAAAAAAAAAAAEABAAAAAAAAAAAAAAABAAAAAAAAAAAAP//BAAAAAAAAAAAAP7/BAAAAAAAAAAAAP3/BAAAAAAAAAAAAPz/BAAAAAAAAAABAPz/BAAAAAAAAAACAPz/BAAAAAAAAAADAPz/BAAAAAAAAAAEAPz/BAAAAAAAAAAFAPz/BAAAAAAAAAAGAPz/BAAAAAAAAAAIAPz/BAAAAAAAAAAKAPz/BAAAAAAAAAAJAPz/BAAAAAAAAAAHAPz/BAAAAAAAAAANAPz/BAAAAAAAAAAMAPz/BAAAAAAAAAALAPz/BAAAAAAAAAAAAAQABAAAAAAAAAAAAAUABAAAAAAAAAABAAUABAAAAAAAAAACAAUABAAAAAAAAAADAAUABAAAAAAAAAAEAAUABAAAAAAAAAAFAAUABAAAAAAAAAAGAAUABAAAAAAAAAAHAAUABAAAAAAAAAAIAAUABAAAAAAAAAAJAAUABAAAAAAAAAAKAAUABAAAAAAAAAALAAUABAAAAAAAAAAMAAUABAAAAAAAAAANAAUABAAAAAAAAAAOAAUABAAAAAAAAAAOAPz/BAAAAAAAAAAOAP3/BAAAAAAAAAAOAP7/BAAAAAAAAAAOAP//BAAAAAAAAAAOAAAABAAAAAAAAAAOAAEABAAAAAAAAAAOAAIABAAAAAAAAAAOAAMABAAAAAAAAAAOAAQABAAAAAAAAAA=")
-tile_set = SubResource("TileSet_dirli")
+tile_map_data = PackedByteArray("AAAAAAMABAAAAAAAAAAAAAIABAAAAAAAAAAAAAEABAAAAAAAAAAAAAAABAAAAAAAAAAAAP//BAAAAAAAAAAAAP7/BAAAAAAAAAAAAP3/BAAAAAAAAAAAAPz/BAAAAAAAAAABAPz/BAAAAAAAAAACAPz/BAAAAAAAAAADAPz/BAAAAAAAAAAEAPz/BAAAAAAAAAAFAPz/BAAAAAAAAAAGAPz/BAAAAAAAAAAIAPz/BAAAAAAAAAAKAPz/BAAAAAAAAAAJAPz/BAAAAAAAAAAHAPz/BAAAAAAAAAALAPz/BAAAAAAAAAAAAAQABAAAAAAAAAAAAAUABAAAAAAAAAABAAUABAAAAAAAAAACAAUABAAAAAAAAAADAAUABAAAAAAAAAAEAAUABAAAAAAAAAAFAAUABAAAAAAAAAAGAAUABAAAAAAAAAAHAAUABAAAAAAAAAAIAAUABAAAAAAAAAAJAAUABAAAAAAAAAAKAAUABAAAAAAAAAALAAUABAAAAAAAAAAMAAUABAAAAAAAAAANAAUABAAAAAAAAAAOAAUABAAAAAAAAAAOAPz/BAAAAAAAAAAOAP3/BAAAAAAAAAAOAP7/BAAAAAAAAAAOAP//BAAAAAAAAAAOAAAABAAAAAAAAAAOAAQABAAAAAAAAAAOAAIABAAAAAAAAAAOAAMABAAAAAAAAAAOAAEABAAAAAAAAAA=")
+tile_set = ExtResource("5_pnfqk")
 
 [node name="OpeningFade" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="Overlay" type="ColorRect" parent="OpeningFade"]
 anchors_preset = 15
@@ -102,3 +46,14 @@ mouse_filter = 2
 color = Color(0.00453645, 0.00453645, 0.00453645, 1)
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_pnfqk")]
+visible = false
+
+[node name="FirstRoom" parent="." instance=ExtResource("8_mwd66")]
+visible = false
+position = Vector2(416, -384)
+
+[node name="Door" parent="." node_paths=PackedStringArray("NextRoom", "dialogue_box") instance=ExtResource("9_hpmrr")]
+position = Vector2(416, -112)
+rotation = 1.5708
+NextRoom = NodePath("../FirstRoom")
+dialogue_box = NodePath("../DialogueBox")

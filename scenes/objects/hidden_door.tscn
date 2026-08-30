@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://xihe52pii61p"]
+
+[ext_resource type="Script" uid="uid://bmkxx0hqhsc57" path="res://scripts/hiddenDoor.gd" id="1_7ekht"]
+[ext_resource type="Texture2D" uid="uid://f5y0ivt0xyf" path="res://assets/sprites/templateTilemap.png" id="2_yokwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edejk"]
+size = Vector2(32, 64)
+
+[node name="HiddenDoor" type="Area2D"]
+collision_layer = 3
+script = ExtResource("1_7ekht")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_edejk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+texture = ExtResource("2_yokwn")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(0, -32)
+texture = ExtResource("2_yokwn")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_edejk")

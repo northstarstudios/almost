@@ -1,6 +1,6 @@
 extends Node2D
 
-const TITLE_SCENE := "res://scenes/intro_scene.tscn"
+const TITLE_SCENE := "res://scenes/ui/main_menu.tscn"
 
 @onready var reset_transition: ResetTransition = $ResetTransition
 @onready var opening_fade: ColorRect = $OpeningFade/Overlay
