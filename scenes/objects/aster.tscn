@@ -1,8 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://hpm5dduceu4u"]
 
 [ext_resource type="Script" uid="uid://71yit1hcwnwm" path="res://scripts/aster.gd" id="1_v6okt"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mjm5x"]
+[ext_resource type="Texture2D" uid="uid://m4s04xudvyuw" path="res://assets/sprites/ari.png" id="2_ari"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn815"]
 size = Vector2(43, 65)
@@ -14,8 +13,7 @@ script = ExtResource("1_v6okt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-16.25, 0.75)
-scale = Vector2(32, 48)
-texture = SubResource("PlaceholderTexture2D_mjm5x")
+texture = ExtResource("2_ari")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-16.25, 0.75)
